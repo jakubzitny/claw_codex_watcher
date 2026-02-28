@@ -55,7 +55,7 @@ final class CarPlayCoordinator {
         template.emptyViewSubtitleVariants = ["Connect to your local watcher API to see sessions."]
 
         rootTemplate = template
-        interfaceController.setRootTemplate(template, animated: true)
+        interfaceController.setRootTemplate(template, animated: true, completion: nil)
     }
 
     private var sectionHeader: String {
@@ -107,12 +107,12 @@ final class CarPlayCoordinator {
                 title: "Watcher Error",
                 sections: [CPListSection(items: [item])]
             )
-            try? await interfaceController.pushTemplate(errorTemplate, animated: true)
+            interfaceController.pushTemplate(errorTemplate, animated: true, completion: nil)
             return
         }
 
         let detailTemplate = makeDetailTemplate(for: detail)
-        try? await interfaceController.pushTemplate(detailTemplate, animated: true)
+        interfaceController.pushTemplate(detailTemplate, animated: true, completion: nil)
     }
 
     private func makeDetailTemplate(for detail: ThreadDetail) -> CPListTemplate {
