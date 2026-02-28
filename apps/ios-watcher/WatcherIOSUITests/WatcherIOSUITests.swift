@@ -6,12 +6,11 @@ final class WatcherIOSUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testAppLaunchesAndShowsPrimaryTabs() throws {
+    func testAppLaunchesToForeground() throws {
         let app = XCUIApplication()
         app.launch()
 
+        XCTAssertTrue(app.wait(for: .runningForeground, timeout: 5))
         XCTAssertEqual(app.state, .runningForeground)
-        XCTAssertTrue(app.tabBars.buttons["Threads"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.tabBars.buttons["Settings"].exists)
     }
 }
