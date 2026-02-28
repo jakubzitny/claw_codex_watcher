@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+playwright-report
+test-results
+apps/web/dist
+apps/api/.venv
+apps/api/__pycache__
+apps/api/.pytest_cache
+.watcher
+apps/api/tests/fixtures/codex_home/*.db
+*.pyc
+.DS_Store
+DerivedData
+*.xcresult
+*.xcworkspace/xcuserdata
+*.xcodeproj/xcuserdata
