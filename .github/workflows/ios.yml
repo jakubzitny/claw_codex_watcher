@@ -1,0 +1,51 @@
+name: iOS
+
+on:
+  pull_request:
+    paths:
+      - apps/ios-watcher/**
+      - .github/workflows/ios.yml
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - apps/ios-watcher/**
+      - .github/workflows/ios.yml
+
+jobs:
+  ios-tests:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.5
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate iOS project
+        run: pnpm --filter @watcher/ios gen
+
+      - name: Build iOS app
+        run: pnpm --filter @watcher/ios build
+
+      - name: Run iOS unit tests
+        run: pnpm --filter @watcher/ios test:unit
+
+      - name: Run iOS UI tests
+        run: pnpm --filter @watcher/ios test:ui

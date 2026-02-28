@@ -1,0 +1,12 @@
+{
+  "name": "@watcher/ios",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "gen": "xcodegen generate --spec project.yml",
+    "build": "./scripts/xcodebuild-ios.sh build",
+    "test": "./scripts/xcodebuild-ios.sh test",
+    "test:unit": "./scripts/test-ios-unit.sh",
+    "test:ui": "./scripts/test-ios-ui.sh"
+  }
+}
